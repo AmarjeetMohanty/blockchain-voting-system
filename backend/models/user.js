@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    didVote:{
+        type: Boolean,
+        default: false
     }
 })
 

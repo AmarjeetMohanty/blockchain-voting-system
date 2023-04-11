@@ -1,44 +1,87 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import styles from '../styles/vote.module.css'
+import { Box, Button, Typography } from '@mui/material';
+import axios from 'axios';
 
 const Vote = () => {
+  
+    const [selectedIndex, setSelectedIndex] = useState()
+    const [loading, setLoading] = useState(true)
+    const options = [
+      "BJP",
+      "Congress",
+      "AAP"
+    ]
+    const handleSubmit = async ()=>{
+      const user_id = localStorage.getItem("user")
+      if(selectedIndex){
+      axios.post("/api/vote", {
+        user:user_id
+      }).then((response)=>{
+          router.push("/footer");
+      }).catch((err)=>{
+        alert("error")
+      })}
+    }
+    const handleClick = (index) =>{
+      setSelectedIndex(index);
+    }
     const router = useRouter()
-    useEffect(()=>{
-        const user_id = localStorage.getItem("user")
+    useEffect(  ()=>{
+      const user_id = localStorage.getItem("user")
         if (!user_id){
-            router.push("/verification")
-        }
-    })
+            router.push("/verification");
+        }else{
+         axios.post("/api/validate", {
+          user:user_id
+        }).then((response)=>{
+          if(
+            response.data.didVote==true
+          ){
+            router.push("/footer");
+          }else{
+            setLoading(false)
+          }
+        }).catch((err)=>{
+          console.log(err)
+        })}
+    },[])
+
     return (
-        <div>
-
-
-      <main>
-        <h1>Vote</h1>
-
-        <form>
-
-
-          <div>
-            <label htmlFor="option1">Option 1</label>
-            <input type="radio" id="option1" name="vote" value="option1" />
-          </div>
-
-          <div>
-            <label htmlFor="option2">Option 2</label>
-            <input type="radio" id="option2" name="vote" value="option2" />
-          </div>
-
-          <div>
-            <label htmlFor="option3">Option 3</label>
-            <input type="radio" id="option3" name="vote" value="option3" />
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
-
-      </main>           
-        </div>
+       <> {!loading && <Box sx={{
+          display:"flex",
+          flexDirection:"column",
+          justifyContent:"center",
+          alignItems:"center",
+          gap:10,
+          height:"100vh"
+        }}>
+          <Typography variant='h3'>Vote</Typography>
+          <Box
+            sx={{
+              display:"flex",
+              width:"70%",
+              justifyContent:"space-evenly",
+              mt:10,
+            }}
+           >
+            {
+              options.map((option, index)=>{
+                return(<Button 
+                  variant={!(selectedIndex==index) ? 'outlined' : 'contained'}
+                  onClick={(e)=>{handleClick(index)}}
+                  >
+                    {option}
+                </Button>
+                )
+              })
+            }
+          </Box>
+          <Button variant='contained' color='success' onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Box>}</>
     );
 }
 
