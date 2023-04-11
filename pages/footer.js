@@ -28,7 +28,12 @@ const Footer = () => {
         })}
         }
     },[])
-    return (<Box>
+    return (<Box sx={{
+        height:"100vh",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center"
+    }}>
         <h2>Thanks for Voting</h2>
         </Box>)
 }

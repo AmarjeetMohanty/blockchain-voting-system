@@ -88,12 +88,14 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
+  
   background: linear-gradient(
       to bottom,
-      transparent,
+      rgb(81, 0, 255),
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    background-repeat: no-repeat;
 }
 
 a {
