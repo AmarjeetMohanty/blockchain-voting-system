@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 
 export default function Verify() {
@@ -55,13 +55,7 @@ export default function Verify() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </Box>
-        <Box sx={{
-      display:"flex",
-      flexDirection:"column",
-      justifyContent:"center",
-      alignItems:"center",
-      gap:1}}>
+        
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -69,14 +63,7 @@ export default function Verify() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </Box>
-        <Box sx={{
-      display:"flex",
-      flexDirection:"column",
-      justifyContent:"center",
-      alignItems:"center",
-      gap:1}}>
-        <button type="submit" >Verify</button>
+        <Button sx={{mt:3}} variant="contained" type="submit">Sign In</Button>
         </Box>
         
       </form>

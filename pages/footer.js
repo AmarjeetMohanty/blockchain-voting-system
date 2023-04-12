@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import axios from "axios"
 import React from "react"
 import { useEffect } from "react"
@@ -36,27 +36,16 @@ const Footer = () => {
     return (<Box sx={{
         height:"100vh",
         display:"flex",
+        flexDirection:"column",
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        gap:7
     }}>
       
-      <Box sx={{
-      height:"100vh",
-      display:"flex",
-      justifyContent:"center",
-      alignItems:"center"
-  }}>
         <h2>Thanks for Voting</h2>
-        </Box>
-        <Box sx={{
-        height:"100vh",
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center"
-    }}>
-     <button onClick={handleSubmit}>View Statistics</button>
+       
+     <Button variant="contained" onClick={handleSubmit}>View Statistics</Button>
 
-    </Box>
 
 
         </Box>)
