@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 
 export default function Verify() {
@@ -31,10 +32,22 @@ export default function Verify() {
   };
 
   return (
-    <div>
+    <Box  sx={{
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
+      gap:7,
+      height:"100vh"
+    }}>
       <h1>Verification Page</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+      <Box sx={{
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
+      gap:1}}>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -42,8 +55,13 @@ export default function Verify() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </div>
-        <div>
+        </Box>
+        <Box sx={{
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
+      gap:1}}>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -51,10 +69,18 @@ export default function Verify() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </div>
-        <button type="submit">Verify</button>
+        </Box>
+        <Box sx={{
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
+      gap:1}}>
+        <button type="submit" >Verify</button>
+        </Box>
+        
       </form>
       {error && <p>{error}</p>}
-    </div>
+    </Box>
   );
 }
