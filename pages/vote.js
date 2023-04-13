@@ -46,7 +46,7 @@ const Vote = () => {
         }).catch((err)=>{
           console.log(err)
         })}
-    },[])
+    })
 
     return (
        <> {!loading && <Box sx={{

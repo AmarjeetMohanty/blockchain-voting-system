@@ -27,7 +27,7 @@ const Footer = () => {
           console.log(err)
         })}
         }
-    },[])
+    })
     const handleSubmit = async (event)=>{
       event.preventDefault();
       router.push("/stats");
