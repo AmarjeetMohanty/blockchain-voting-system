@@ -69,6 +69,7 @@ const Vote = () => {
             {
               options.map((option, index)=>{
                 return(<Button 
+                  key={index}
                   variant={!(selectedIndex==index) ? 'outlined' : 'contained'}
                   onClick={(e)=>{handleClick(index)}}
                   >
