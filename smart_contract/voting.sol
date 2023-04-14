@@ -46,9 +46,9 @@ contract MyContracts{
             }
         }
     }
-    function winningName() public view returns(string memory winningName_,uint winningCount ){
+    function winningName() public view returns(string memory winningName_ ){
         winningName_=proposals[winningproposal()].name;
-        winningCount=proposals[winningVoteCount].voteCount;
+        
 
     }
 
