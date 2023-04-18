@@ -135,10 +135,11 @@ const contractAddress = '0x652c9ACcC53e765e1d96e2455E618dAaB79bA595'; // Insert 
 let provider = new ethers.JsonRpcProvider("https://mainnet.infura.io/v3/59bb994837e348dcb3b79612153b46bd")
 async function main(){
     const contract = new ethers.Contract(contractAddress,contractABI, provider)
-    // const name = await contract.winningproposal()
-    // console.log(name)
-    // let block = await provider.getBlockNumber();
-    // console.log(block)
+    const name = await contract.getDeployedCode()
+    console.log(name)
+	
+    let block = await provider.getBlockNumber();
+    console.log(block)
 }
 main()
 // // Define the contract ABI and address
