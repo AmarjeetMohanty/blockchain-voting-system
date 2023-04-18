@@ -6,7 +6,8 @@ const contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'; // Insert 
 
 
 async function main(){
-	let provider = new ethers.getDefaultProvider("https://mainnet.infura.io/v3/59bb994837e348dcb3b79612153b46bd", {})
+	//let provider = new ethers.getDefaultProvider("https://mainnet.infura.io/v3/59bb994837e348dcb3b79612153b46bd", {})
+	const provider = new ethers.providers.Web3Provider(window.ethereum)
     const contract = new ethers.Contract(contractAddress,abi, provider)
     const name = await contract.winningName()
     console.log(name)
