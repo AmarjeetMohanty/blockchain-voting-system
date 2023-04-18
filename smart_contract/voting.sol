@@ -1,34 +1,53 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-contract Blockchain {
-    struct Block {
-        uint256 blockNumber;
-        bytes32 blockHash;
-        bool mined;
+pragma solidity >=0.7.0<0.9.0;
+contract MyContracts{
+    struct Proposal{
+        bytes32 name;
+        uint voteCount;
+    }
+    struct Voter{
+        uint vote;
+        bool voted;
+        uint weight;
+    }
+    Proposal[] public proposals;
+    mapping(address =>Voter) public voters;
+    address public chairperson;
+    constructor(bytes32[] memory proposalNames){
+        chairperson = msg.sender;
+        voters[chairperson].weight=1;
+        for(uint i =0; i<proposalNames.length; i++){
+            proposals.push(Proposal({
+                name: proposalNames[i],
+                voteCount:0
+            })); 
+        }
+    }
+    function authenticate(address voter) public{
+        require(msg.sender == chairperson, 'only the chairperson can give access to vote');
+        require(!voters[voter].voted,'the voter has already voted');
+        require(voters[voter].weight==0);
+        voters[voter].weight=1;
+    }
+    function voting(uint proposal) public{
+        Voter storage sender = voters[msg.sender];
+        require(sender.weight!=0,'has no right to vote');
+        require(!sender.voted,'already voted');
+        sender.voted=true;
+        sender.vote=proposal;
+        proposals[proposal].voteCount +=  sender.weight;
+    }
+    function winningproposal() public view returns(uint winningproposal_){
+        uint winningVoteCount=0;
+        for(uint i=0;i<proposals.length;i++){
+            if(proposals[i].voteCount > winningVoteCount){
+                winningVoteCount=proposals[i].voteCount;
+                winningproposal_=i;
+            }
+        }
+    }
+    function winningName() public view returns(bytes32 winningName_ ){
+        winningName_=proposals[winningproposal()].name;
     }
 
-    Block[] public blocks;
-
-    function createBlock(uint256 _blockNumber, bytes32 _blockHash) public {
-        blocks.push(Block(_blockNumber, _blockHash, false));
-    }
-
-    function verifyTransaction(uint256 _index) public view returns (bool) {
-        require(_index < blocks.length, "Block index out of bounds");
-        // TODO: implement zero-knowledge proof for transaction verification
-        return true;
-    }
-
-    function mineBlock(uint256 _index) public {
-        require(_index < blocks.length, "Block index out of bounds");
-        require(blocks[_index].blockHash == blockhash(blocks[_index].blockNumber), "Block hash does not match current blockhash");
-        require(verifyTransaction(_index), "Transaction verification failed");
-        blocks[_index].mined = true;
-    }
-
-    function viewUser(uint256 _index) public view returns (uint256, bytes32, bool) {
-        require(_index < blocks.length, "Block index out of bounds");
-        return (blocks[_index].blockNumber, blocks[_index].blockHash, blocks[_index].mined);
-    }
 }
