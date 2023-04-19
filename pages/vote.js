@@ -5,7 +5,7 @@ import { Alert, Backdrop, Box, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import { decodeBytes32String, ethers } from 'ethers';
 import abiJson from "./abi.json"
-const contractAddress = '0xc490efaf4C653AdaC8b963E5712745D5DFDE7EAa';
+const contractAddress = '0x0A85557Be5c93e40B20f6D7C93fcAE0D607786fC';
 const Vote = () => {
   
     const [selectedIndex, setSelectedIndex] = useState()
@@ -16,6 +16,7 @@ const Vote = () => {
     const [options, setOptions] = useState([])
     useEffect(()=>{
       
+      addOptions()
     })
     const push= () =>{
        
@@ -95,12 +96,20 @@ const Vote = () => {
             err: "No Metamask Wallet found"
           }
         }
+        
         const provider = new ethers.BrowserProvider(ethereum);
-        const contract = new ethers.Contract(contractAddress,abiJson, signer)
-        let option1 = await contract.proposals(0);
-        let option2 = await contract.proposals(1);
-        let option3 = await  contract.proposals(2);
-        setOptions([decodeBytes32String(option1), decodeBytes32String(option2), decodeBytes32String(option3)])
+        const contract = new ethers.Contract(contractAddress,abiJson, provider)
+        const options = []
+        let option1 = await contract.proposals(0).then((proposal)=>{
+          options.push(decodeBytes32String(proposal[0]))
+        });
+        let option2 = await contract.proposals(1).then((proposal)=>{
+          options.push(decodeBytes32String(proposal[0]))
+        });;
+        let option3 = await  contract.proposals(2).then((proposal)=>{
+          options.push(decodeBytes32String(proposal[0]))
+        });;
+        setOptions(options)
       }
         catch{}
     }
@@ -122,7 +131,6 @@ const Vote = () => {
         }).catch((err)=>{
           console.log(err)
         })}
-      addOptions()
     })
 
     return (
@@ -145,7 +153,7 @@ const Vote = () => {
               mt:10,
             }}
            >
-            { options != [] &&
+            { 
               options.map((option, index)=>{
                 return(<Button 
                   key={index}

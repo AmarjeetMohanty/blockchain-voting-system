@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { decodeBytes32String, ethers } from 'ethers';
 import abiJson from "./abi.json"
-const contractAddress = '0xc490efaf4C653AdaC8b963E5712745D5DFDE7EAa';
+const contractAddress = '0x0A85557Be5c93e40B20f6D7C93fcAE0D607786fC';
 const Stats = () => {
     const [winner, setWinner] = useState("")
     const load = () =>{
@@ -22,7 +22,7 @@ const Stats = () => {
             })
             
         }catch{
-            alert("Dhak teri ma ki chut")
+            alert("Check Internet Connection")
         }
     }
     useEffect(()=>{
