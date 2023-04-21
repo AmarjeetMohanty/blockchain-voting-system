@@ -1,38 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blockchain Voting System
+
+This repository contains a Python-based blockchain voting system that allows users to vote securely and anonymously. The voting system is built on top of a blockchain, which provides a tamper-proof and transparent ledger of all votes cast.
+
+## Files
+
+The following files are included in this repository:
+
+- `block.py`: Defines the structure of a block in the blockchain.
+- `blockchain.py`: Implements the blockchain and provides functions for adding blocks and validating the chain.
+- `candidate.py`: Defines the structure of a candidate in the voting system.
+- `node.py`: Implements a node in the blockchain network.
+- `transaction.py`: Defines the structure of a transaction in the voting system.
+- `voter.py`: Defines the structure of a voter in the voting system.
+- `voting_system.py`: Implements the main functionality of the voting system, including adding voters, candidates, and conducting the vote.
 
 ## Getting Started
 
-First, run the development server:
+To get started, simply clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/AmarjeetMohanty/blockchain-voting-system.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, install the required packages:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+pip install -r requirements.txt
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Now, you can run the blockchain voting system by executing the `voting_system.py` file.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+When you run the voting system, you will be presented with a menu of options:
 
-## Learn More
+1. Add a voter
+2. Add a candidate
+3. Conduct the vote
+4. View the results of the vote
+5. Exit
 
-To learn more about Next.js, take a look at the following resources:
+To add a voter, select option 1 from the menu and follow the prompts to enter the voter's information.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To add a candidate, select option 2 from the menu and follow the prompts to enter the candidate's information.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To conduct the vote, select option 3 from the menu and follow the prompts to enter the voter's information and the candidate they are voting for.
 
-## Deploy on Vercel
+To view the results of the vote, select option 4 from the menu.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To exit the voting system, select option 5 from the menu.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+If you would like to contribute to this repository, please feel free to open an issue or submit a pull request.
+
+## License
+
+This repository is licensed under the MIT License. See the LICENSE file for more information.
